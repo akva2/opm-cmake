@@ -718,9 +718,10 @@ private:
         // deltaSwImbPc_ = SwPcMdcImbibition - pcSwMdc_;
 
         if (config().krHysteresisModel() == 2 || config().krHysteresisModel() == 3 || config().krHysteresisModel() == 4 || config().pcHysteresisModel() == 0) {
-            Scalar Snhy = 1.0 - krnSwMdc_;
-            if (Snhy > Sncrd_) {
-                Sncrt_ = Sncrd_ + (Snhy - Sncrd_)/((1.0+config().modParamTrapped()*(Snmaxd_-Snhy)) + C_*(Snhy - Sncrd_));
+            const Scalar snhy = 1.0 - krnSwMdc_;
+            if (snhy > Sncrd_) {
+                Sncrt_ = Sncrd_ + (snhy - Sncrd_) /
+                        ((1.0 + config().modParamTrapped()*(Snmaxd_ - snhy)) + C_ * (snhy - Sncrd_));
             }
             else
             {
